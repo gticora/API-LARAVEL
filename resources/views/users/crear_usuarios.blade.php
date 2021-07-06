@@ -10,7 +10,8 @@
                 </p>
             </div>
             <div class="table-responsive-lg">
-                <form method="POST" action="{{ url('create') }}">
+                <form method="POST" action="{{ route('users.create') }}">
+                @csrf
                     <div class="form-group">
                         <label for="name">Nombre:</label>
                         <input type="text" class="form-control" name="name" id="name" placeholder="Ingrese Nombre" value="{{ old('name') }}">

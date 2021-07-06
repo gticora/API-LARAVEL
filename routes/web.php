@@ -31,8 +31,8 @@ Route::get('/usuarios', 'App\Http\Controllers\UserController@index')
 Route::get('/usuarios/nuevo', [App\Http\Controllers\UserController::class, 'form_users'])
     ->name('users.crear_usuarios');
 
-//Route::get('/usuarios/nuevo', [App\Http\Controllers\UserController::class, 'create'])
-  //->name('create');
+Route::post('/usuarios/nuevo', [App\Http\Controllers\UserController::class, 'create'])
+  ->name('users.create');
 
 Route::get('/home', 'App\Http\Controllers\UserController@index')
     ->name('users.index');

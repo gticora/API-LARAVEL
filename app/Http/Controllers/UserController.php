@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
-
+       // return $request;
         $request->validate([
             'name' => 'required|string',
             'dni' => 'required|string',
@@ -41,6 +41,7 @@ class UserController extends Controller
             $usuarios->name = $request->name;
             $usuarios->dni = $request->dni;
             $usuarios->email = $request->email;
+            $usuarios->profile_url = '';
             $usuarios->password = $request->password;
         if($usuarios->save())
         {
