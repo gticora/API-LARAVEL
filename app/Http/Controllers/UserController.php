@@ -45,9 +45,12 @@ class UserController extends Controller
             $usuarios->password = $request->password;
         if($usuarios->save())
         {
-            return response()->json([
-                'message' => 'Usuario creado con éxito!'
-            ], 201);
+            $title = 'Listado de usuarios';
+
+            return view('users.index', compact('title', 'users'));
+            // return response()->json([
+            //     'message' => 'Usuario creado con éxito!'
+            // ], 201);
         }
         else
         {
@@ -56,7 +59,7 @@ class UserController extends Controller
             ], 404);
         }
 
-        return view('users.crear_usuarios', compact('title'));
+        
     }
 
 
@@ -68,6 +71,57 @@ class UserController extends Controller
         $title = 'Listado de usuarios en papelera';
 
         return view('users.index', compact('title', 'users'));
+    }
+
+    public function show(User $user)
+    {
+        return view('users.show', compact('user'));
+    }
+
+    // public function store(CreateUserRequest $request)
+    // {
+    //     $request->createUser();
+
+    //     return redirect()->route('users.index');
+    // }
+
+    // public function edit(User $user)
+    // {
+    //     return $this->form('users.edit', $user);
+    // }
+
+    // protected function form($view, User $user)
+    // {
+    //     return view($view, [
+    //         'cargos' => Cargo::orderBy('title', 'ASC')->get(),
+    //         'skills' => Skill::orderBy('name', 'ASC')->get(),
+    //         'roles' => trans('users.roles'),
+    //         'user' => $user,
+    //     ]);
+    // }
+
+    // public function update(UpdateUserRequest $request, User $user)
+    // {
+    //     $request->updateUser($user);
+
+    //     return redirect()->route('users.show', ['user' => $user]);
+    // }
+
+    public function trash(User $user)
+    {
+        $user->delete();
+        $user->profile()->delete();
+
+        return redirect()->route('users.index');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::onlyTrashed()->where('id', $id)->firstOrFail();
+
+        $user->forceDelete();
+
+        return redirect()->route('users.trashed');
     }
 
 

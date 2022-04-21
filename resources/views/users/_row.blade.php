@@ -12,8 +12,13 @@
         {{ $users->name }}
     </th>
     <td>{{ $users->email }}</td>
-
-
+    <td class="text-right">
+            <form action="" method="POST">
+                <a href="{{ route('users.show', $users) }}" class="btn btn-outline-secondary btn-sm"><span class="oi oi-eye"></span></a>
+                <a href="{{ route('users.edit', $users) }}" class="btn btn-outline-secondary btn-sm"><span class="oi oi-pencil"></span></a>
+                <button type="submit" class="btn btn-outline-danger btn-sm"><span class="oi oi-trash"></span></button>
+            </form>
+    </td>
 
 
 

@@ -36,3 +36,9 @@ Route::post('/usuarios/nuevo', [App\Http\Controllers\UserController::class, 'cre
 
 Route::get('/home', 'App\Http\Controllers\UserController@index')
     ->name('users.index');
+
+Route::get('/usuarios/{user}', 'UserController@show')
+    ->where('user', '[0-9]+')
+    ->name('users.show');
+
+Route::get('/usuarios/{user}/editar', 'UserController@edit')->name('users.edit');
